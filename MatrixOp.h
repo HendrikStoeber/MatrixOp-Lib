@@ -2,15 +2,16 @@
 #define MATRIX_OP_H
 #define SIZE 3
 //Basic
-int* Add(int A[SIZE][SIZE], int B[SIZE][SIZE]);
-int* Sub(int A[SIZE][SIZE], int B[SIZE][SIZE]);
-int* Dot(int A[SIZE][SIZE], int B[SIZE][SIZE]);
+void Add(int A[SIZE][SIZE], int B[SIZE][SIZE], int res[SIZE][SIZE]);
+void Sub(int A[SIZE][SIZE], int B[SIZE][SIZE], int res[SIZE][SIZE]);
+void Dot(int A[SIZE][SIZE], int B[SIZE][SIZE], int res[SIZE][SIZE]);
 //Linear
-int* Mult(int A[SIZE][SIZE], int B[SIZE][SIZE]);
-int* Trp(int A[SIZE][SIZE]);
+void Mult(int A[SIZE][SIZE], int B[SIZE][SIZE], int res[SIZE][SIZE]);
+void Trp(int A[SIZE][SIZE], int res[SIZE][SIZE]);
 //Advanced
-int Det(int A[SIZE][SIZE]);
-int* Adj(int A[SIZE][SIZE]);
+int Det3x3(int A[SIZE][SIZE]);
+int Det2x2(int A[2][2]);
+void Adj(int A[SIZE][SIZE], int res[SIZE][SIZE]);
 //Inverse
-int* Inv(int A[SIZE][SIZE]);
+void Inv(int A[SIZE][SIZE], float res[SIZE][SIZE]);
 #endif
