@@ -1,9 +1,8 @@
 #include "MatrixOp.h"
-#include<stdio.h>
+#include <stdio.h>
 //Basic
 void Add(int A[SIZE][SIZE], int B[SIZE][SIZE], int res[SIZE][SIZE])
 {
-    int res[SIZE][SIZE];
     for(int i=0;i<SIZE;i++)
     {
         for(int j=0;j<SIZE;j++)
@@ -14,7 +13,6 @@ void Add(int A[SIZE][SIZE], int B[SIZE][SIZE], int res[SIZE][SIZE])
 }
 void Sub(int A[SIZE][SIZE], int B[SIZE][SIZE], int res[SIZE][SIZE])
 {
-    int res[SIZE][SIZE];
     for(int i=0;i<SIZE;i++)
     {
         for(int j=0;j<SIZE;j++)
@@ -25,7 +23,6 @@ void Sub(int A[SIZE][SIZE], int B[SIZE][SIZE], int res[SIZE][SIZE])
 } 
 void Dot(int A[SIZE][SIZE], int B[SIZE][SIZE], int res[SIZE][SIZE])
 {
-    int res[SIZE][SIZE];
     for(int i=0;i<SIZE;i++)
     {
         for(int j=0;j<SIZE;j++)
@@ -37,7 +34,6 @@ void Dot(int A[SIZE][SIZE], int B[SIZE][SIZE], int res[SIZE][SIZE])
 //Linear
 void Mult(int A[SIZE][SIZE], int B[SIZE][SIZE], int res[SIZE][SIZE])
 {
-    int res[SIZE][SIZE];
     for(int i=0;i<SIZE;i++)
     {
         for(int j=0;j<SIZE;j++)
@@ -53,7 +49,6 @@ void Mult(int A[SIZE][SIZE], int B[SIZE][SIZE], int res[SIZE][SIZE])
 }
 void Trp(int A[SIZE][SIZE], int res[SIZE][SIZE])
 {
-    int res[SIZE][SIZE];
     for(int i=0;i<SIZE;i++)
     {
         for(int j=0;j<SIZE;j++)
@@ -81,29 +76,35 @@ int Det2x2(int A[2][2])
 }
 void Adj(int A[SIZE][SIZE], int res[SIZE][SIZE])
 {
-    int adj[SIZE][SIZE];
-    adj[0][0] =  (A[1][1]*A[2][2] - A[1][2]*A[2][1]);
-    adj[0][1] = -(A[0][1]*A[2][2] - A[0][2]*A[2][1]);
-    adj[0][2] =  (A[0][1]*A[1][2] - A[0][2]*A[1][1]);
+    res[0][0] =  (A[1][1]*A[2][2] - A[1][2]*A[2][1]);
+    res[0][1] = -(A[0][1]*A[2][2] - A[0][2]*A[2][1]);
+    res[0][2] =  (A[0][1]*A[1][2] - A[0][2]*A[1][1]);
 
-    adj[1][0] = -(A[1][0]*A[2][2] - A[1][2]*A[2][0]);
-    adj[1][1] =  (A[0][0]*A[2][2] - A[0][2]*A[2][0]);
-    adj[1][2] = -(A[0][0]*A[1][2] - A[0][2]*A[1][0]);
+    res[1][0] = -(A[1][0]*A[2][2] - A[1][2]*A[2][0]);
+    res[1][1] =  (A[0][0]*A[2][2] - A[0][2]*A[2][0]);
+    res[1][2] = -(A[0][0]*A[1][2] - A[0][2]*A[1][0]);
 
-    adj[2][0] =  (A[1][0]*A[2][1] - A[1][1]*A[2][0]);
-    adj[2][1] = -(A[0][0]*A[2][1] - A[0][1]*A[2][0]);
-    adj[2][2] =  (A[0][0]*A[1][1] - A[0][1]*A[1][0]);
+    res[2][0] =  (A[1][0]*A[2][1] - A[1][1]*A[2][0]);
+    res[2][1] = -(A[0][0]*A[2][1] - A[0][1]*A[2][0]);
+    res[2][2] =  (A[0][0]*A[1][1] - A[0][1]*A[1][0]);
 }
 //Inverse
 void Inv(int A[SIZE][SIZE], float res[SIZE][SIZE])
 {
-    if(Det3x3(A)==0)
+    int det = Det3x3(A);
+    if(det==0)
     {
-        printf("Det is 0, Matrix cant be inverted.")
+        printf("Det is 0, Matrix cant be inverted.");
+        return;
     }
-    else{
-        
-        return 1/Det3x3(A)*Adj(A);
-    }
+    int adj[SIZE][SIZE];
+    Adj(A,adj);
 
+    for(int i=0;i<SIZE;i++)
+    {
+        for(int j=0;j<SIZE;j++)
+        {
+            res[i][j] = (float)adj[i][j] / det;  
+        }
+    }
 }
